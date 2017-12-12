@@ -12,7 +12,6 @@ typedef struct User
 {
     char* userid;
     char* username;
-    box_channel* c;
     struct User* next;
 } User;
 
@@ -30,22 +29,23 @@ static User* findUser(char* userid)
     return NULL;
 }
 
-static void addUser(char* userid, char* username, box_channel* c)
+static void addUser(char* userid, char* username)
 {
     User* user = findUser(userid);
     if(user == NULL)
     {
         user = box_malloc(sizeof(*user));
         user->next = users;
-        user->c = c;
         user->userid = strdup(userid);
         user->username = strdup(username);
         users = user;
+        printf("add new user\n");
     }
     else
     {
         free(user->username);
         user->username = strdup(username);
+        printf("change name\n");
     }
 }
 
