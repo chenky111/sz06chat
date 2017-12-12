@@ -17,6 +17,9 @@ void read_udp(box_channel* c)
 
     printf("recv buf: %s\n", buf);
 
+    if(userid == NULL)
+        return;
+
     char* cmd = strtok(buf, "|");
     char* userid_from = strtok(NULL,  "|");
     if(strcmp(userid_from, userid) == 0)
