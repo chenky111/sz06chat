@@ -1,4 +1,8 @@
 
+git add -A
+git commit -m "aaaa"
+git push origin master:master
+
 if [ $# -eq 0 ]
 then
     make -C box/src
