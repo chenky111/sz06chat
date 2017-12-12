@@ -11,4 +11,4 @@ fi
 
 git add -A
 git commit -m "aaaa"
-git push origin master:master
+git push server master:master
