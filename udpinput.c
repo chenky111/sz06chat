@@ -38,6 +38,7 @@ void read_udp(box_channel* c)
         char* name = strtok(NULL, "|");
         change_name(userid, name);
 
+        char buf[8192];
         // 回应
         sprintf(buf, "nameack|%s|%s", userid, myname);
         printf("send nameack --> %s\n", userid_from);
