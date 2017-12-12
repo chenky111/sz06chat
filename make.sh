@@ -1,13 +1,14 @@
 
-git add -A
-git commit -m "aaaa"
-git push origin master:master
 
 if [ $# -eq 0 ]
 then
     make -C box/src
-    make
+    make || exit 1
 else
     make -C box/src $1
-    make $1
+    make $1 
 fi
+
+git add -A
+git commit -m "aaaa"
+git push origin master:master

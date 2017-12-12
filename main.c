@@ -42,6 +42,9 @@ int main()
     addr.sin_port = htons(UDP_PORT);
     addr.sin_addr.s_addr = 0;
     int ret = bind(udp_socket, (struct sockaddr*)&addr, sizeof(addr));
+    int opt = 1;
+    setsockopt(udp_socket, SOL_SOCKET, SO_BROADCAST, &opt, sizeof(opt));
+
     if(ret < 0)
     {
         printf("udp bind error\n");

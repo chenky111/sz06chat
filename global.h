@@ -12,7 +12,7 @@ static void broadcast(char* buf)
 {
     struct sockaddr_in addr;
     addr.sin_family = AF_INET;
-    addr.sin_port = UDP_PORT;
+    addr.sin_port = htons(UDP_PORT);
     addr.sin_addr.s_addr = inet_addr("255.255.255.255");
 
     sendto(udp_socket, buf, strlen(buf), 0, (struct sockaddr*)&addr, sizeof(addr));
