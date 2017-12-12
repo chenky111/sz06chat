@@ -42,9 +42,16 @@ void read_stdin(box_channel* c)
         char* name = strtok(NULL, "\0");
         change_name(name);
     }
+    // 显示用户列表
     else if(strcmp(cmd, "list") == 0)
     {
-
+        User* user  = users;
+        printf("user list:\n");
+        while(user)
+        {
+            printf("  %s\t%s\n", user->userid, user->username);
+            user = user->next;
+        }
     }
     else if(strcmp(cmd, "msg") == 0)
     {

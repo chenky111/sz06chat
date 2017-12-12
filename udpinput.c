@@ -41,5 +41,10 @@ void read_udp(box_channel* c)
         sprintf(buf, "nameack|%s|%s", userid, myname);
         sendUdp(buf, userid_from);
     }
+    if(strcmp(cmd, "nameack") == 0)
+    {
+        char* name = strtok(NULL, "|");
+        change_name(userid, name);
+    }
 
 }
