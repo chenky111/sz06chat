@@ -1,4 +1,5 @@
 #include <box/box.h>
+#include "global.h"
 
 
 void read_tcp(box_channel* c)

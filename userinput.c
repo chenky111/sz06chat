@@ -37,7 +37,7 @@ void read_stdin(box_channel* c)
     char* cmd = strtok(buf, "|");
     if(strcmp(cmd, "name") == 0)
     {
-        char* name = strtod(NULL, "\0");
+        char* name = strtok(NULL, "\0");
         change_name(name);
     }
     else if(strcmp(cmd, "list") == 0)
