@@ -3,6 +3,7 @@
 
 #include <box/box.h>
 extern char* userid;
+extern char* myname;
 extern int udp_socket;
 
 #define UDP_PORT 9999
@@ -49,14 +50,21 @@ static void addUser(char* userid, char* username)
     }
 }
 
-static void broadcast(char* buf)
+
+
+static void sendUdp(char* buf, char* ip)
 {
     struct sockaddr_in addr;
     addr.sin_family = AF_INET;
     addr.sin_port = htons(UDP_PORT);
-    addr.sin_addr.s_addr = inet_addr("255.255.255.255");
+    addr.sin_addr.s_addr = inet_addr(ip);
 
     sendto(udp_socket, buf, strlen(buf), 0, (struct sockaddr*)&addr, sizeof(addr));
+}
+
+static void broadcast(char* buf)
+{
+    sendUdp(buf, "255.255.255.255");
 }
 
 // ifconfig | grep inet | grep -v inet6 | awk '{print $2}' | awk -F ":" '{print $2}'

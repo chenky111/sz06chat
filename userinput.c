@@ -2,6 +2,7 @@
 #include "global.h"
 
 char* userid = NULL;
+char* myname = NULL;
 
 static void change_name(char* name)
 {
@@ -15,6 +16,7 @@ static void change_name(char* name)
 
     char buf[8192];
     sprintf(buf, "name|%s|%s", userid, name);
+    myname = strdup(name);
 
     // 发送
     broadcast(buf);
