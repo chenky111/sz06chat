@@ -3,7 +3,7 @@
 
 char* userid = NULL;
 
-void change_name(char* name)
+static void change_name(char* name)
 {
     // 其实要发送广播
     //"name|userid-from|username"

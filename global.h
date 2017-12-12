@@ -8,6 +8,47 @@ extern int udp_socket;
 #define UDP_PORT 9999
 #define TCP_PORT 9998
 
+typedef struct User
+{
+    char* userid;
+    char* username;
+    box_channel* c;
+    struct User* next;
+} User;
+
+extern User* users;
+
+static User* findUser(char* userid)
+{
+    User* user = users;
+    while(user)
+    {
+        if(strcmp(user->userid, userid) == 0)
+            return user;
+        user= user->next;
+    }
+    return NULL;
+}
+
+static void addUser(char* userid, char* username, box_channel* c)
+{
+    User* user = findUser(userid);
+    if(user == NULL)
+    {
+        user = box_malloc(sizeof(*user));
+        user->next = users;
+        user->c = c;
+        user->userid = strdup(userid);
+        user->username = strdup(username);
+        users = user;
+    }
+    else
+    {
+        free(user->username);
+        user->username = strdup(username);
+    }
+}
+
 static void broadcast(char* buf)
 {
     struct sockaddr_in addr;
@@ -26,8 +67,8 @@ static void create_userid()
     fgets(buf, sizeof(buf), fp);
     buf[strlen(buf)-1] = 0;
 
- //   userid = malloc(strlen(buf)+1);
- //   strcpy(userid, buf);
+    //   userid = malloc(strlen(buf)+1);
+    //   strcpy(userid, buf);
 
     userid = strdup(buf);
 }
