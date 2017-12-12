@@ -19,11 +19,7 @@ void accept_tcp(box_channel* c)
 }
 
 void read_stdin(box_channel* c);
-
-void read_udp(box_channel* c)
-{
-
-}
+void read_udp(box_channel* c);
 
 int udp_socket;
 
