@@ -1,6 +1,6 @@
 
-chat.bin: main.c
-	gcc main.c -lbox -o chat.bin
+chat.bin: main.c userinput.c
+	gcc $^ -lbox -o chat.bin
 
 clean:
 	rm chat.bin

@@ -1,6 +1,5 @@
 #include <box/box.h>
-#define UDP_PORT 9999
-#define TCP_PORT 9998
+
 
 void read_tcp(box_channel* c)
 {
@@ -18,15 +17,14 @@ void accept_tcp(box_channel* c)
     }
 }
 
-void read_stdin(box_channel* )
-{
-    fgets(buf, sizeof(buf), stdin);
-}
+void read_stdin(box_channel* c);
 
 void read_udp(box_channel* c)
 {
 
 }
+
+int udp_socket;
 
 int main()
 {
@@ -37,7 +35,7 @@ int main()
     box_add(c);
 
     // 创建一个UDP socket
-    int udp_socket = socket(AF_INET, SOCK_DGRAM, 0);
+    udp_socket = socket(AF_INET, SOCK_DGRAM, 0);
     struct sockaddr_in addr;
     addr.sin_family = AF_INET;
     addr.sin_port = htons(UDP_PORT);
