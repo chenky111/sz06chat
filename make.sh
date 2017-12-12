@@ -1,4 +1,5 @@
 
+git pull sever master
 
 if [ $# -eq 0 ]
 then
