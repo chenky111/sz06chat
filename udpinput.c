@@ -28,6 +28,7 @@ void read_udp(box_channel* c)
     char* userid_from = strtok(NULL,  "|");
     if(strcmp(userid_from, userid) == 0)
     {
+        printf("recv broadcast from self\n");
         return;
     }
 
@@ -39,6 +40,7 @@ void read_udp(box_channel* c)
 
         // 回应
         sprintf(buf, "nameack|%s|%s", userid, myname);
+        printf("send nameack --> %s\n", userid_from);
         sendUdp(buf, userid_from);
     }
     if(strcmp(cmd, "nameack") == 0)
