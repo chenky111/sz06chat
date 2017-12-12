@@ -2,13 +2,6 @@
 #define GLOBAL_H
 
 #include <box/box.h>
-extern char* userid;
-extern char* myname;
-extern int udp_socket;
-
-#define UDP_PORT 9999
-#define TCP_PORT 9998
-
 typedef struct User
 {
     char* userid;
@@ -17,6 +10,15 @@ typedef struct User
 } User;
 
 extern User* users;
+
+extern char* myuserid;
+extern char* myname;
+extern int udp_socket;
+
+#define UDP_PORT 9999
+#define TCP_PORT 9998
+
+
 
 static User* findUser(char* userid)
 {
@@ -78,7 +80,7 @@ static void create_userid()
     //   userid = malloc(strlen(buf)+1);
     //   strcpy(userid, buf);
 
-    userid = strdup(buf);
+    myuserid = strdup(buf);
 }
 
 #endif // GLOBAL_H

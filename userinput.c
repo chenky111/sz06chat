@@ -1,7 +1,7 @@
 #include <box/box.h>
 #include "global.h"
 
-char* userid = NULL;
+char* myuserid = NULL;
 char* myname = NULL;
 
 static void change_name(char* name)
@@ -9,14 +9,16 @@ static void change_name(char* name)
     // 其实要发送广播
     //"name|userid-from|username"
 
-    if(userid == NULL)
+    if(myuserid == NULL)
     {
         create_userid();
     }
 
-    char buf[8192];
-    sprintf(buf, "name|%s|%s", userid, name);
     myname = strdup(name);
+
+    char buf[8192];
+    sprintf(buf, "name|%s|%s", myuserid, name);
+
 
     // 发送
     broadcast(buf);
@@ -27,7 +29,7 @@ static void change_name(char* name)
 void read_stdin(box_channel* c)
 {
     char buf[8192];
-    fgets(buf, sizeof(buf), stdin);
+    fgets(buf, sizeof(buf), stdin); // 不会阻塞
     buf[strlen(buf)-1] = 0;
 
     if(strlen(buf)  == 0)
@@ -55,7 +57,12 @@ void read_stdin(box_channel* c)
     }
     else if(strcmp(cmd, "msg") == 0)
     {
+        char* userid = strtok(NULL, "|");
+        char* content = strtok(NULL, "|");
 
+        char buf[8192];
+        sprintf(buf, "msg|%s|%s", myuserid, content);
+        sendUdp(buf, userid);
     }
     else if(strcmp(cmd, "msg-all") == 0)
     {
