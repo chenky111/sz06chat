@@ -1,5 +1,5 @@
 
-git pull sever master
+git pull server master
 
 if [ $# -eq 0 ]
 then
